@@ -7,7 +7,7 @@ const Container = styled.div`
     display: flex;
     gap: 18vw;
     padding: 3vw;
-    margin-left: 13vw;
+    margin-left: 14vw;
     margin-top: -1vw;
 `;
 const ContainerText = styled.div`

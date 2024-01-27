@@ -9,7 +9,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    margin-left: 25vw;
+    margin-left: 28vw;
     margin-top: -4vw;
 
 `
@@ -45,6 +45,18 @@ const HeaderText = styled.span`
     font-weight: 600;
     line-height: normal;
 `;
+
+const AsteriscoText = styled.span`
+color: var(--Secundarios-09-Error-DC2020, #DC2020);
+
+/* Parrafos (Escritorio y Móvil)/P2 Medium 14px */
+font-variant: Barlow;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 500;
+line-height: 1.25rem; /* 142.857% */
+`;
+
 
 const FormHeaderText = styled.span`
     color: var(--Neutral-Black, #0C0C0C);
@@ -166,9 +178,9 @@ function Form (){
         setPatente(event.target.value);
       };
 
-    const [opcion1, setOpcion1] = useState("Miata");
-    const [opcion2, setOpcion2] = useState("RX-8");
-    const [marca, setMarca] = useState("Mazda");
+    const [opcion1, setOpcion1] = useState("");
+    const [opcion2, setOpcion2] = useState("");
+    const [marca, setMarca] = useState("");
     const handleChangeMarca = (event) => {
         setMarca(event.target.value);
             setOpcion1('');
@@ -203,6 +215,14 @@ function Form (){
     const handleSendData = () =>{
         setId(Date.now());
         dispatch(addAuto({id,nombre,rut,patente,marca,modelo,precio}))
+        setNombre('');
+        setRut('');
+        setPatente('');
+        setMarca('');
+        setModelo('');
+        setPrecio('');
+        setOpcion1('');
+        setOpcion2('');
     }
     
     
@@ -216,32 +236,32 @@ function Form (){
                 <FormHeaderText> Datos del vendedor:</FormHeaderText> 
                 <ContainerInput>
                     <InputLabelCont>
-                        <Label htmlFor="input1">Nombre completo</Label>
+                        <Label htmlFor="input1">Nombre completo <AsteriscoText>*</AsteriscoText></Label>
                         <InputName value={nombre} onChange={handleChangeNombre} id="input1"></InputName>
                     </InputLabelCont>
                      <InputLabelCont> 
                         <Input value={rut} onChange={handleChangeRut} id="input2"></Input>
-                        <Label htmlFor="input2">Rut Vendedor</Label>
+                        <Label htmlFor="input2">Rut Vendedor <AsteriscoText>*</AsteriscoText></Label>
                      </InputLabelCont>
                 </ContainerInput> 
                 <FormHeaderText> Datos del vehículo:</FormHeaderText>  
                 <ContainerInput>
                     <InputLabelCont> 
                             <Input value={patente} onChange={handleChangePatente} id="input3"></Input>
-                            <Label htmlFor="input3">Patente del vehículo</Label>
+                            <Label htmlFor="input3">Patente del vehículo <AsteriscoText>*</AsteriscoText></Label>
                         </InputLabelCont>
                         <InputLabelCont> 
-                            <InputSelect  value={marca} onChange={handleChangeMarca} id="input4"><option value={'Mazda'}>Mazda</option><option value={'Toyota'}>Toyota</option><option value={'Nissan'}>Nissan</option><option value={'Volvo'}>Volvo</option></InputSelect>
-                            <Label htmlFor="input4">Marca del vehículo</Label>
+                            <InputSelect  value={marca} onChange={handleChangeMarca} id="input4"><option value="" disabled hidden>Elige una marca</option><option value={'Mazda'}>Mazda</option><option value={'Toyota'}>Toyota</option><option value={'Nissan'}>Nissan</option><option value={'Volvo'}>Volvo</option></InputSelect>
+                            <Label htmlFor="input4">Marca del vehículo <AsteriscoText>*</AsteriscoText></Label>
                         </InputLabelCont>
                         <InputLabelCont> 
                       
-                            <InputSelect value={modelo} onChange={handleChangeModelo} id="input5"><option>{opcion1}</option><option>{opcion2}</option></InputSelect>
-                            <Label htmlFor="input5">Modelo del vehículo</Label>
+                            <InputSelect value={modelo} onChange={handleChangeModelo} id="input5"><option value="" disabled hidden>Elige un modelo </option><option value={opcion1}>{opcion1}</option><option value={opcion2}>{opcion2}</option></InputSelect>
+                            <Label htmlFor="input5">Modelo del vehículo <AsteriscoText>*</AsteriscoText></Label>
                         </InputLabelCont>
                         <InputLabelCont> 
                             <InputBlock value={precio} onChange={handleChangePrecio} id="input6"></InputBlock>
-                            <Label htmlFor="input6">Precio del vehículo</Label>
+                            <Label htmlFor="input6">Precio del vehículo <AsteriscoText>*</AsteriscoText> </Label>
                         </InputLabelCont>
                         
                 </ContainerInput> 

@@ -33,6 +33,8 @@ const TableTitle = styled.th`
 function Table (){
     const cars = useSelector((state) => state.auto.list);
     const dispatch = useDispatch()
+    const listaInvertida = [...cars].reverse();
+
     return(
         <>
             <Tabla>
@@ -48,7 +50,7 @@ function Table (){
                     </tr>
                 </thead>
                 <tbody>
-        {cars.map((car) => (
+        {listaInvertida.map((car) => (
           <tr key={car.id}>
             <td>{car.nombre}</td>
             <td>{car.rut}</td>
