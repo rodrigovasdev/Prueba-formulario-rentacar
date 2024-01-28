@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux'
 import { removeAuto } from '../features/autoSlice';
-
+import React from 'react';
 const Tabla = styled.table`
   width: 100%;
   border-collapse: collapse;
 
   th, td {
-    text-align: left;
-    padding: 8px;
+    text-align: center;
+    padding: 13px;
     border-bottom: 1px solid #ddd;
   }
 
@@ -19,8 +19,8 @@ const Tabla = styled.table`
 const TableTitle = styled.th`
   white-space: nowrap; 
   th {
-    text-align: center; // Centrar texto en los encabezados
-    background-color: #f4f4f4; // Opcional: un fondo diferente para los encabezados
+    text-align: center; 
+    background-color: #f4f4f4; 
   }
   &.break-word::after {
     content: attr(data-title) " ";
@@ -29,11 +29,27 @@ const TableTitle = styled.th`
   }
 `;
 
+const IconButton = styled.button`
+  background: url('src/assets/Eliminar.png') center/contain no-repeat; 
+  padding: 10px; 
+  margin-left:1vw;
+  border: none;
+`;
+const Span = styled.span`
+  text-align: center;
+  color: #000;
+  font-variant: Barlow;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
 
 function Table (){
     const cars = useSelector((state) => state.auto.list);
     const dispatch = useDispatch()
     const listaInvertida = [...cars].reverse();
+    const cantidadAutos = listaInvertida.length;
 
     return(
         <>
@@ -50,22 +66,22 @@ function Table (){
                     </tr>
                 </thead>
                 <tbody>
-        {listaInvertida.map((car) => (
-          <tr key={car.id}>
-            <td>{car.nombre}</td>
-            <td>{car.rut}</td>
-            <td>{car.patente}</td>
-            <td>{car.marca}</td>
-            <td>{car.modelo}</td>
-            <td>{car.precio}</td>
-            <td>
-              <button onClick={()=>{dispatch(removeAuto(car.id))}}>Eliminar</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-            
+                  {listaInvertida.slice(0,10).map((car) => (
+                    <tr key={car.id}>
+                      <td>{car.nombre}</td>
+                      <td>{car.rut}</td>
+                      <td>{car.patente}</td>
+                      <td>{car.marca}</td>
+                      <td>{car.modelo}</td>
+                      <td>{car.precio}</td>
+                      <td>
+                        <IconButton onClick={()=>{dispatch(removeAuto(car.id))}}></IconButton>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
             </Tabla>
+            <Span>Mostrando registros del 1 al 10 de un total de {cantidadAutos} registros.</Span>
         </>
     )
 }

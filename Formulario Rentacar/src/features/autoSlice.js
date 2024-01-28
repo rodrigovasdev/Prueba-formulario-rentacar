@@ -15,7 +15,7 @@ export const autoSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
+
 export const { addAuto , removeAuto} = autoSlice.actions;
 
 export default autoSlice.reducer;

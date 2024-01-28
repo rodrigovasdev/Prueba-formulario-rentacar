@@ -11,20 +11,16 @@ const Container = styled.div`
 function App() {
   const [count, setCount] = useState(0)
   const [childProp, setChildProp] = useState(true);
-
   const handleProp = (newChildProp) => {
     setChildProp(newChildProp);
-    console.log(childProp)
   };
 
   return (
     <Container>
-
-      <Navbar prop={handleProp}></Navbar>
-      {childProp && <Content/>}
-      {childProp && <Form/>}
-      {!childProp && <ListaFormulario></ListaFormulario>}
-
+        <Navbar prop={handleProp}></Navbar>
+        {childProp && <Content/>}
+        {childProp && <Form/>}
+        {!childProp && <ListaFormulario></ListaFormulario>}
     </Container>
     
   )
